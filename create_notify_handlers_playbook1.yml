@@ -1,0 +1,39 @@
+---
+- name: Playbook to install packages with notify and handlers
+  hosts: all
+  become: true
+  tasks:
+  - name: install httpd package
+    yum:
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat"
+    notify: start httpd service
+
+  - name: install apache2 package
+    apt:
+      name: apache2
+      state: present
+    when: ansible_os_family == "Debian"
+    notify: start apache2 service
+      
+  - name: creating web package
+    copy:
+      src: /home/ansadmin/ansiblepracticelocalrepo/index.html
+      dest: /var/www/html/
+      mode: 0777
+
+  handlers:
+  - name: start httpd service
+    service:
+      name: httpd
+      state: started
+    when: ansible_os_family == "RedHat"
+
+  - name: start apache2 service
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Debian"
+
+...

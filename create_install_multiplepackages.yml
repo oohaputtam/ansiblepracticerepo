@@ -1,0 +1,10 @@
+---
+- name: Install multiple packages
+  hosts: all
+  become: true
+  tasks:
+  - name: install apache
+    yum:
+      name: ['git', 'docker', 'wget', 'httpd', 'vi', 'tree']
+      state: installed
+...

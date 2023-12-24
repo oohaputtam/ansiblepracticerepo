@@ -1,0 +1,11 @@
+---
+- name: Playbook using copy module
+  hosts: all
+  become: true
+  tasks:
+  - name: copymodule
+    copy:
+      src: /home/ansadmin/ansiblepracticelocalrepo/index.html
+      dest: /var/www/
+...
+

@@ -1,0 +1,11 @@
+---
+- name: This playbook is to create empty files
+  hosts: all
+  become: true
+  tasks:
+  - name: creating file
+    file:
+      path: /home/ansadmin/file1
+      state: touch
+      
+...
